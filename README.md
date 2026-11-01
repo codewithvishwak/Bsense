@@ -3,6 +3,8 @@
 This project analyzes customer purchase behavior and predicts `Purchase` for
 the standard Black Friday dataset.
 
+![Salesense Black Friday prediction frontend](web/salesense-preview.png)
+
 ## Run
 
 1. Install dependencies:
