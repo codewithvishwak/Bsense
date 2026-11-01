@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Black Friday Sales Predictor</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Black Friday Predictor home">
+          <span class="brand-mark">B</span>
+          <span>SALE<span class="brand-accent">SENSE</span></span>
+        </a>
+        <span class="status"><span class="status-dot"></span> MODEL ONLINE</span>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> BLACK FRIDAY 2026</p>
+          <h1>Know the value<br>before they <em>buy.</em></h1>
+        </div>
+        <p class="subtitle">Enter customer details and get an estimated purchase amount from the sales model.</p>
+        <div class="hero-art">
+          <img class="hero-image" src="/black-friday-hero.png" alt="Black Friday sale shoppers with gifts">
+          <div id="hero-badge" class="burst">SALE<br><b>UP</b><br>TO 70%</div>
+          <div id="hero-forecast" class="hero-forecast">
+            <span>BLACK FRIDAY</span>
+            <strong>Smart shopping<br>starts here.</strong>
+          </div>
+          <div class="art-ring"></div>
+          <div class="art-dot"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">CUSTOMER PROFILE</p>
+            <h2>Tell us about the shopper</h2>
+          </div>
+          <span class="step">01 <i>/</i> 01</span>
+        </div>
+        <form id="prediction-form">
+          <div class="form-grid">
+            <label>Gender
+              <select name="Gender"><option value="M">Male</option><option value="F">Female</option></select>
+            </label>
+            <label>Age group
+              <select name="Age">
+                <option>0-17</option><option>18-25</option><option selected>26-35</option>
+                <option>36-45</option><option>46-50</option><option>51-55</option><option>55+</option>
+              </select>
+            </label>
+            <label>Occupation code
+              <input name="Occupation" type="number" min="0" max="20" value="4" required>
+            </label>
+            <label>City category
+              <select name="City_Category"><option>A</option><option selected>B</option><option>C</option></select>
+            </label>
+            <label>Years in current city
+              <select name="Stay_In_Current_City_Years"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4+</option></select>
+            </label>
+            <label>Marital status
+              <select name="Marital_Status"><option value="0">Single</option><option value="1">Married</option></select>
+            </label>
+          </div>
+          <button class="primary" type="submit"><span>Calculate prediction</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+          <p id="error" class="message error" role="alert" hidden></p>
+        </form>
+        <div id="result" class="result" hidden>
+          <span class="result-icon" aria-hidden="true">✓</span>
+          <span class="result-label">ESTIMATED PURCHASE AMOUNT</span>
+          <strong id="prediction">₹0</strong>
+          <p>Model estimate based on the details provided.</p>
+          <button id="reset" class="secondary" type="button">Make another prediction</button>
+        </div>
+      </section>
+      
+      <section class="analytics">
+        <div class="analytics-heading">
+          <div>
+            <p class="section-kicker">VISUAL ANALYSIS</p>
+            <h2>See the shopping patterns</h2>
+          </div>
+          <span class="live-label"><span class="status-dot"></span> LIVE DATASET</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><span id="purchase-stat-label">AVERAGE PURCHASE</span><strong id="average-purchase">—</strong></div>
+          <div class="stat"><span>ROWS ANALYZED</span><strong id="rows-analyzed">—</strong></div>
+          <div class="stat"><span id="age-stat-label">TOP AGE GROUP</span><strong id="top-age">—</strong></div>
+        </div>
+        <p id="profile-context" class="profile-context">Showing overall dataset patterns</p>
+        <div class="charts">
+          <div class="chart-card">
+            <div class="chart-title"><h3>Average purchase by age</h3><span>₹</span></div>
+            <img id="analysis-chart" class="analysis-chart" src="/api/analysis-chart" alt="Matplotlib purchase analysis chart">
+            <p id="chart-status" class="chart-status" role="status" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="forecasting card">
+        <div class="analytics-heading">
+          <div>
+            <p class="section-kicker">FORECASTING LAB</p>
+            <h2>From transactions to decisions</h2>
+          </div>
+          <span class="step">80 / 20 SPLIT</span>
+        </div>
+        <p id="forecast-copy" class="section-copy">Compare regression models and identify the factors that matter most for demand, inventory, and marketing capacity planning.</p>
+        <div id="forecast-personalized" class="forecast-personalized" hidden>
+          <div>
+            <span class="forecast-label">PERSONALIZED FORECAST</span>
+            <strong id="forecast-profile">—</strong>
+          </div>
+          <div class="forecast-value">
+            <span>ESTIMATED DEMAND VALUE</span>
+            <strong id="forecast-prediction">—</strong>
+          </div>
+          <span id="forecast-badge" class="forecast-badge">READY</span>
+        </div>
+        <div class="forecast-grid">
+          <div>
+            <h3>Model performance</h3>
+            <div id="model-table" class="model-table"><p class="loading">Evaluating models...</p></div>
+          </div>
+          <div>
+            <h3 id="drivers-title">Top purchase drivers</h3>
+            <p id="drivers-context" class="drivers-context">Overall model feature importance</p>
+            <div id="feature-list" class="feature-list"><p class="loading">Calculating feature importance...</p></div>
+          </div>
+        </div>
+        <div class="methodology">
+          <h3>Forecasting workflow</h3>
+          <div id="workflow" class="workflow"></div>
+        </div>
+        <div class="hypothesis-grid">
+          <div><h3>Product-level hypotheses</h3><ul id="product-hypotheses"></ul></div>
+          <div><h3>Store-level hypotheses</h3><ul id="store-hypotheses"></ul></div>
+        </div>
+      </section>
+      <footer>
+        <span class="footer-mark">POWERED BY <b>ML</b></span>
+      </footer>
+    </main>
+    <script src="/script.js"></script>
+  </body>
+</html>
